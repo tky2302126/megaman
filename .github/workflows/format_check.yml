@@ -1,0 +1,39 @@
+# ワークフローの名前
+name: Code Format Check
+ 
+# mainブランチに対するプルリクエストが作られたら実行
+on:
+  push:
+    branches:
+      - main
+ 
+# 実行するジョブ
+jobs:
+  format-check:
+    runs-on: ubuntu-latest
+ 
+    steps:
+    - name: コードを取得
+      uses: actions/checkout@v4
+ 
+    - name: .NETをセットアップ
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+ 
+    - name: dotnet formatをインストール
+      run: dotnet tool install --global dotnet-format
+ 
+    - name: フォーマットチェックを実行
+      run: |-
+        dotnet format ExampleApp.csproj \
+          --verify-no-changes \
+          --report ./format-check-report.json
+ 
+    - name: レポートを整形してアップロードする
+      if: failure()
+      run: |-
+          echo "ファイルパス | 行 | 列 | エラー内容" >> $GITHUB_STEP_SUMMARY
+          echo "--- | --- | --- | ---" >> $GITHUB_STEP_SUMMARY
+          cat ./format-check-report.json | jq -r --arg base "$(pwd)" \
+            '.[] | . as $parent | .FileChanges[] | "\($parent.FilePath | sub($base + "/"; "")) | \(.LineNumber) | \(.CharNumber) | \(.FormatDescription)"' >> $GITHUB_STEP_SUMMARY
