@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638832151024827180
-    m_Hash: 1131477615
+      ticks: 638838253907183099
+    m_Hash: 1288892088
   m_LockFileStatus:
     m_FilePath: C:/Users/student2/Documents/megaman/megaman/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638832151323516731
-    m_Hash: 2402534220
+      ticks: 638838253907230939
+    m_Hash: 3286565323
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
@@ -22,6 +22,63 @@ m_LocalPackages:
 m_ProjectPath: C:/Users/student2/Documents/megaman/megaman/Packages
 m_EditorVersion: 2022.3.48f1 (8bf49c377ebf)
 m_ResolvedPackages:
+- packageId: com.cysharp.unitask@https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask
+  testable: 0
+  isDirectDependency: 1
+  version: 2.5.10
+  source: 5
+  resolvedPath: C:\Users\student2\Documents\megaman\megaman\Library\PackageCache\com.cysharp.unitask@f213ff497e
+  assetPath: Packages/com.cysharp.unitask
+  name: com.cysharp.unitask
+  displayName: UniTask
+  author:
+    name: Cysharp, Inc.
+    email: 
+    url: https://cysharp.co.jp/en/
+  category: Task
+  type: 
+  description: Provides an efficient async/await integration to Unity.
+  status: 0
+  errors: []
+  versions:
+    all: []
+    compatible: []
+    recommended: 
+    deprecated: []
+  dependencies: []
+  resolvedDependencies: []
+  keywords:
+  - async/await
+  - async
+  - Task
+  - UniTask
+  registry:
+    id: main
+    name: 
+    url: https://packages.unity.com
+    scopes: []
+    isDefault: 1
+    capabilities: 7
+    configSource: 0
+  hideInEditor: 1
+  isAssetStorePackage: 0
+  datePublishedTicks: 0
+  documentationUrl: 
+  hasRepository: 0
+  repository:
+    type: 
+    url: 
+    revision: 
+    path: 
+  unityLifecycle:
+    version: 
+    nextVersion: 
+    recommendedVersion: 
+    isDeprecated: 0
+    deprecationMessage: 
+  isDeprecated: 0
+  deprecationMessage: 
+  fingerprint: 
 - packageId: com.unity.collab-proxy@2.5.1
   testable: 0
   isDirectDependency: 1
@@ -770,11 +827,13 @@ m_ResolvedPackages:
     - 1.9.4
     - 1.9.5
     - 1.9.6
+    - 1.9.7
     compatible:
     - 1.9.4
     - 1.9.5
     - 1.9.6
-    recommended: 1.9.6
+    - 1.9.7
+    recommended: 1.9.7
     deprecated:
     - 1.8.0-pre.1
   dependencies:
