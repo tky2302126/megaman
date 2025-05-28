@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 
     public int score = 0;
 
+    [SerializeField] private GameObject startPanel;
+
     private void Awake()
     {
         Instance = this;
@@ -29,5 +31,11 @@ public class GameManager : MonoBehaviour
         }
 
         // 今後：結果画面へ遷移、リトライ、タイトルに戻る等
+    }
+
+    public void OnStartButton()
+    {
+        startPanel.SetActive(false);
+        Time.timeScale = 1f;
     }
 }

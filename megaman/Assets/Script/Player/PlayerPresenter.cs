@@ -4,7 +4,7 @@ using Cysharp.Threading.Tasks;
 public class PlayerPresenter : MonoBehaviour, IDamageable
 {
     [Header("レーン設定")]
-    public float[] laneYPositions = { 1.5f, 0f, -1.5f };
+    public float[] laneYPositions = { 1.0f, 0f, -1.0f };
     private int currentLane = 1;
 
     [Header("移動設定")]
