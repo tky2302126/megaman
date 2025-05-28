@@ -19,7 +19,11 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // 何かに当たったら自分を消す（後で敵判定を追加）
-        Destroy(gameObject);
+        var target = collision.GetComponent<IDamageable>();
+        if(target != null)
+        {
+            target.TakeDamage(1);
+            Destroy(gameObject);
+        }
     }
 }
