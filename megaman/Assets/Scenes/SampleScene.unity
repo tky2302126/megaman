@@ -2017,6 +2017,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1668049705763079934, guid: 17cdfb88c88bce84f99aac464cd3976a, type: 3}
+      propertyPath: model
+      value: 
+      objectReference: {fileID: 11400000, guid: 8980f9ce7ddc2e646a6e64c4a065e320, type: 2}
+    - target: {fileID: 1668049705763079934, guid: 17cdfb88c88bce84f99aac464cd3976a, type: 3}
       propertyPath: playerUI
       value: 
       objectReference: {fileID: 331169329}

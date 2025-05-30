@@ -1,18 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerModel : MonoBehaviour
+[CreateAssetMenu(fileName = "PlayerModel", menuName = "Game/PlayerModel")]
+public class PlayerModel : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("ステータス")]
+    public int maxHp = 5;
+    [HideInInspector] public int currentHp;
+
+    public float moveDuration = 0.15f;
+    public float fireCooldown = 0.5f;
+
+    public void Init()
     {
-        
+        currentHp = maxHp;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void TakeDamage(int damage)
     {
-        
+        currentHp -= damage;
+        currentHp = Mathf.Max(currentHp, 0);
     }
+
+    public bool IsDead => currentHp <= 0;
 }

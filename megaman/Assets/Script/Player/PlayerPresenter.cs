@@ -7,19 +7,19 @@ public class PlayerPresenter : MonoBehaviour, IDamageable
     public float[] laneYPositions = { 1.0f, 0f, -1.0f };
     private int currentLane = 1;
 
-    [Header("移動設定")]
-    public float moveDuration = 0.15f;
     private bool isMoving = false;
 
     public GameObject bulletPrefab; // Inspectorから指定
     public Transform firePoint;     // 弾の発射位置
 
-    public float fireCooldown = 0.5f;
     private float fireTimer = 0.0f;
 
-    // modelに移管予定
-    public int maxHp = 5;
-    private int currentHp;
+    [SerializeField] private PlayerModel model;
+
+    private int MaxHp => model.maxHp;
+    private int CurrentHp => model.currentHp;
+    private float MoveDuration => model.moveDuration;
+    private float FireCooldown => model.fireCooldown;
 
     private Animator animator;
 
@@ -29,15 +29,15 @@ public class PlayerPresenter : MonoBehaviour, IDamageable
     {
         animator = GetComponent<Animator>();
         transform.position = new Vector3(transform.position.x, laneYPositions[currentLane], transform.position.z);
-        currentHp = maxHp;
+        model.Init();
         playerUI = FindAnyObjectByType<PlayerUI>();
-        playerUI.SetHP(currentHp, maxHp);
+        playerUI.SetHP(CurrentHp, MaxHp);
     }
 
     private void Update()
     {
         fireTimer -= Time.deltaTime;
-        HandleInput().Forget();
+        if(!isMoving)HandleInput();
     }
 
     private async UniTaskVoid HandleInput()
@@ -58,7 +58,7 @@ public class PlayerPresenter : MonoBehaviour, IDamageable
         if (Input.GetKeyDown(KeyCode.Space) && fireTimer <= 0f)
         {
             Attack();
-            fireTimer = fireCooldown;
+            fireTimer = FireCooldown;
         }
     }
 
@@ -71,9 +71,9 @@ public class PlayerPresenter : MonoBehaviour, IDamageable
         Vector3 end = new Vector3(start.x, laneYPositions[laneIndex], start.z);
 
         float elapsed = 0f;
-        while (elapsed < moveDuration)
+        while (elapsed < MoveDuration)
         {
-            transform.position = Vector3.Lerp(start, end, elapsed / moveDuration);
+            transform.position = Vector3.Lerp(start, end, elapsed / MoveDuration);
             elapsed += Time.deltaTime;
             await UniTask.Yield();
         }
@@ -92,10 +92,10 @@ public class PlayerPresenter : MonoBehaviour, IDamageable
 
     public void TakeDamage(int damage)
     {
-        currentHp -= damage;
-        playerUI.SetHP(currentHp, maxHp);
+        model.TakeDamage(damage);
+        playerUI.SetHP(CurrentHp, MaxHp);
 
-        if(currentHp <= 0)
+        if(model.IsDead)
         {
             Die();
         }
